@@ -1,0 +1,221 @@
+#:kivy 2.0.0
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import Label kivy.uix.label.Label
+
+MDFloatLayout:
+	md_bg_color: 1,1,1,1
+	ScreenManager:
+		id: scr
+		transition: NoTransition()
+		MDScreen:
+			name: "alarm"
+			md_Bg_color: 1, 1, 1, 1
+
+			MDIconButton:
+				icon: "plus"
+				pos_hint: {"center_x": 0.87, 'center_y': .94 }
+				md_bg_color: 0,0,0,1
+				theme_text_color: "Custom"
+				text_color: 1,1,1,1
+				on_release: app.time_picker()
+
+
+			MDLabel:
+				id: alarm_label
+				text: "My Alarms: "
+				font_size: "30sp"
+				pos_hint: { 'center_y': 0.95}
+				halign: "center"
+				bold: True
+
+			MDLabel:
+				id: alarm_time
+				text: ""
+				font_size: "30sp"
+				pos_hint: { 'center_y': 0.5}
+				halign: "center"
+				bold: True
+
+			MDRaisedButton:
+				text: "Stop"
+				pos_hint: {"center_x": 0.5, 'center_y': .4 }
+				on_release: app.stop()
+			MDRaisedButton:
+				text: "play game"
+				pos_hint: {"center_x": 0.5, 'center_y': .33 }
+				on_release: app.gameOpen()
+
+		MDScreen:
+			name: "guitar_game"
+			canvas:
+				Rotate:
+					angle: 45
+					origin: self.center
+
+				Color:
+					rgb: 1,0,0
+				Rectangle:
+					pos: self.center_x - 5, 0
+					size: 10, self.height
+					
+			ScatterLayout:
+				do_rotation: False
+				do_scale: False
+				do_translation: False
+				rotation: 90
+				pos_hint: {'center_x': 0.85, 'center_y': 0.5}
+				size_hint: 1.3, None
+
+				MDGridLayout:
+					cols: 12
+					size_hint: 1, .66
+					pos_hint: {"center_x": .55}
+					Button:
+						id: bottom_note1
+						text:"C"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note2
+						text:"C#  Db"
+						font_size: 17
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note3
+						text:"D"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note4
+						text:"D#  Eb"
+						font_size: 17
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note5
+						text:"E"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note6
+						text:"F"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note7
+						text:"F#  Gb"
+						font_size: 17
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note8
+						text:"G"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note9
+						text:"G#  Ab"
+						font_size: 17
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note10
+						text:"A"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note11
+						text:"A# Bb"
+						font_size: 17
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)
+					Button:
+						id: bottom_note12
+						text:"B"
+						font_size: 20
+						text_size: self.size     
+						halign: 'center'
+						valign: 'center'
+						padding_y: 10
+						on_release: app.select(self)		
+				MDGridLayout:
+					size_hint: 1.1, 2
+					pos_hint: {"center_x": .55, "center_y": 2}
+					cols: 13
+					rows: 6
+					on_parent:
+						app.createLabels(self)
+			
+		
+	NavBar:
+		size_hint: 0.7, 0.1
+		pos_hint: {"center_x": .5, "center_y": .05}
+		elevation: 10
+		md_bg_color: 1,1,1,1
+		radius: [16]
+		MDGridLayout:
+			cols: 3
+			size_hint_x: 0.9
+			spacing: 90
+			pos_hint: {"center_x": .5, "center_y": .5}
+			MDIconButton:
+				id:nav_icon1
+				icon: "alarm"
+				ripple_scale: 0
+				user_font_size: "30sp"
+				theme_text_color: "Custom"
+				text_color: 1, 0, 0, 1
+				on_release:
+					scr.current = "alarm"
+					app.change_color(self)
+					
+			MDIconButton:
+				id:nav_icon2
+				icon: "guitar-acoustic"
+				ripple_scale: 0
+				user_font_size: "30sp"
+				theme_text_color: "Custom"
+				text_color: 0, 0, 0, 1
+				on_release:
+					scr.current = "guitar_game"
+					app.change_color(self)
